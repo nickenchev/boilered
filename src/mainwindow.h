@@ -5,6 +5,8 @@
 #include <boiler.h>
 #include "renderview.h"
 
+class EntityListModel;
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -17,6 +19,8 @@ class MainWindow : public QMainWindow
     QWidget *container;
     RenderView *renderView;
 
+    EntityListModel *entityListModel;
+
 public:
     MainWindow(Boiler::Engine &engine, QWidget *parent = nullptr);
     ~MainWindow();
@@ -24,11 +28,9 @@ public:
     QWidget *getRenderContainer();
     RenderView *getRenderView();
 
-    void start()
-    {
-        engine.getPart()->onStart();
-        getRenderView()->requestUpdate();
-        getRenderView()->setRunning(true);
-    }
+    void start();
+
+private slots:
+    void on_pushButton_clicked();
 };
 #endif // MAINWINDOW_H

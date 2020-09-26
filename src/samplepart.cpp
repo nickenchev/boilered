@@ -205,7 +205,7 @@ void SamplePart::onStart()
 	engine.getRenderer().setClearColor({0, 0, 0});
 	//std::string base = "/home/nenchev/Developer/projects/boiler-3d/data";
 	std::string base = "data/glTF-Sample-Models-master/2.0";
-	std::string modelName = "FlightHelmet";
+    std::string modelName = "Sponza";
 	std::string modelPath = fmt::format("/{}/glTF/", modelName);
 	std::string modelFile = fmt::format("{}.gltf", modelName);
 	std::string bufferPath{base + modelPath};

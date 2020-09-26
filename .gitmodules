@@ -1,0 +1,3 @@
+[submodule "boiler"]
+	path = boiler
+	url = git@github.com:nickenchev/boiler.git

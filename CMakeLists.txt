@@ -21,9 +21,11 @@ add_executable(boilered
   src/mainwindow.ui
   src/renderview.h
   src/samplepart.h
+  src/entitylistmodel.cpp
+  src/entitylistmodel.h
 )
 
 add_subdirectory(boiler/ libboiler)
 
-target_include_directories(boilered PUBLIC boiler)
-target_link_libraries(boilered PRIVATE Qt5::Widgets boiler)
+target_include_directories(boilered INTERFACE boiler)
+target_link_libraries(boilered boiler Qt5::Widgets)
