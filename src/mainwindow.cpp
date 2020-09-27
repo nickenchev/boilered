@@ -31,10 +31,6 @@ MainWindow::MainWindow(QWidget *parent)
         throw std::runtime_error("Error creating QVulkanInstance");
     }
 
-	// initialize thwe playground part
-	part = std::make_unique<SamplePart>(engine);
-	engine.setPart(part);
-
     renderView = new RenderView(engine);
     renderView->setVulkanInstance(&instance);
 
@@ -46,6 +42,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::showEvent(QShowEvent *event)
 {
+	QMainWindow::showEvent(event);
+
 	container->setGeometry(0, 0, ui->renderParent->width(), ui->renderParent->height());
 
     // create the surface for the render view window
@@ -58,11 +56,23 @@ void MainWindow::showEvent(QShowEvent *event)
     const Boiler::Size engSize(initialSize.width(), initialSize.height());
     engine.initialize(engSize);
 
-	start();
+    // start part, load content
+	part = std::make_shared<SamplePart>(engine);
+	engine.setPart(part);
+    engine.getPart()->onStart();
+
+    // request updates and start running engine
+    renderView->requestUpdate();
+    renderView->setRunning(true);
+
+    // setup entities list
+    ui->entitiesListView->setModel(entityListModel);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+	QMainWindow::closeEvent(event);
+
 	renderView->setRunning(false);
 	engine.getRenderer().prepareShutdown();
 	engine.getRenderer().shutdown();
@@ -74,29 +84,6 @@ MainWindow::~MainWindow()
     delete renderView;
     delete container;
     delete ui;
-}
-
-QWidget *MainWindow::getRenderContainer()
-{
-    return container;
-}
-
-RenderView *MainWindow::getRenderView()
-{
-    return renderView;
-}
-
-void MainWindow::start()
-{
-    // start of part, load content
-    engine.getPart()->onStart();
-
-    // setup entities list
-    ui->entitiesListView->setModel(entityListModel);
-
-    // request updates and start running engine
-    getRenderView()->requestUpdate();
-    getRenderView()->setRunning(true);
 }
 
 void MainWindow::on_pushButton_clicked()

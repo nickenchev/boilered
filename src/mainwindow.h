@@ -42,11 +42,6 @@ public:
 	void closeEvent(QCloseEvent *event) override;
 	void showEvent(QShowEvent *event) override;
 
-    QWidget *getRenderContainer();
-    RenderView *getRenderView();
-
-    void start();
-
 private slots:
     void on_pushButton_clicked();
 };
