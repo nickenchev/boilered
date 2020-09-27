@@ -44,7 +44,7 @@ void MainWindow::showEvent(QShowEvent *event)
 {
 	QMainWindow::showEvent(event);
 
-	container->setGeometry(0, 0, ui->renderParent->width(), ui->renderParent->height());
+	container->setGeometry(2, 2, ui->renderParent->width() - 4, ui->renderParent->height() - 4);
 
     // create the surface for the render view window
 	auto *vkRenderer = static_cast<Boiler::Vulkan::VulkanRenderer *>(renderer.get());
