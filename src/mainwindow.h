@@ -25,6 +25,9 @@ public:
     MainWindow(Boiler::Engine &engine, QWidget *parent = nullptr);
     ~MainWindow();
 
+	// overrides
+	void closeEvent(QCloseEvent *event) override;
+
     QWidget *getRenderContainer();
     RenderView *getRenderView();
 

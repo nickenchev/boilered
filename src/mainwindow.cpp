@@ -17,6 +17,13 @@ MainWindow::MainWindow(Boiler::Engine &engine, QWidget *parent)
     entityListModel = new EntityListModel(engine.getEcs());
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+	renderView->setRunning(false);
+	engine.getRenderer().prepareShutdown();
+	engine.getRenderer().shutdown();
+}
+
 MainWindow::~MainWindow()
 {
     delete entityListModel;
