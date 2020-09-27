@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 project(boilered LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -23,6 +24,8 @@ add_executable(boilered
   src/samplepart.h
   src/entitylistmodel.cpp
   src/entitylistmodel.h
+  src/materiallistmodel.cpp
+  src/materiallistmodel.h
 )
 
 add_subdirectory(boiler/ libboiler)
