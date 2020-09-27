@@ -37,6 +37,10 @@ public:
         setSurfaceType(QSurface::VulkanSurface);
     }
 
+	~RenderView()
+	{
+	}
+
     void setRunning(bool running) { this->running = running; }
 };
 

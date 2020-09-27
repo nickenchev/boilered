@@ -2,31 +2,45 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <boiler.h>
-#include "renderview.h"
+#include <QVulkanInstance>
+
+#include "core/engine.h"
 
 class EntityListModel;
+class RenderView;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+namespace Boiler
+{
+	class Renderer;
+	class Part;
+}
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    Boiler::Engine &engine;
+	// Qt members
+    QVulkanInstance instance;
     Ui::MainWindow *ui;
     QWidget *container;
     RenderView *renderView;
-
     EntityListModel *entityListModel;
 
+	// Boiler related
+	std::unique_ptr<Boiler::Renderer> renderer;
+	std::shared_ptr<Boiler::Part> part;
+    Boiler::Engine engine;
+
 public:
-    MainWindow(Boiler::Engine &engine, QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 	// overrides
 	void closeEvent(QCloseEvent *event) override;
+	void showEvent(QShowEvent *event) override;
 
     QWidget *getRenderContainer();
     RenderView *getRenderView();
