@@ -39,11 +39,15 @@ MainWindow::MainWindow(QWidget *parent)
     renderView->setVulkanInstance(&instance);
 
     container = QWidget::createWindowContainer(renderView, ui->renderParent);
+
+	// data models
     entityListModel = new EntityListModel(engine.getEcs());
 }
 
 void MainWindow::showEvent(QShowEvent *event)
 {
+	container->setGeometry(0, 0, ui->renderParent->width(), ui->renderParent->height());
+
     // create the surface for the render view window
 	auto *vkRenderer = static_cast<Boiler::Vulkan::VulkanRenderer *>(renderer.get());
     VkSurfaceKHR surface = instance.surfaceForWindow(renderView);
@@ -53,6 +57,8 @@ void MainWindow::showEvent(QShowEvent *event)
     const QRect initialSize = container->geometry();
     const Boiler::Size engSize(initialSize.width(), initialSize.height());
     engine.initialize(engSize);
+
+	start();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -64,7 +70,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 MainWindow::~MainWindow()
 {
-
     delete entityListModel;
     delete renderView;
     delete container;
