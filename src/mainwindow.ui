@@ -6,81 +6,87 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1312</width>
-    <height>860</height>
+    <width>1087</width>
+    <height>630</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Boilered</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QSplitter" name="splitter_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>1281</width>
-      <height>801</height>
-     </rect>
+  <widget class="QSplitter" name="splitter_2">
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <widget class="QListView" name="entitiesListView">
+    <property name="maximumSize">
+     <size>
+      <width>300</width>
+      <height>16777215</height>
+     </size>
     </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
+   </widget>
+   <widget class="QSplitter" name="splitter">
     <property name="orientation">
-     <enum>Qt::Horizontal</enum>
+     <enum>Qt::Vertical</enum>
     </property>
-    <widget class="QListView" name="entitiesListView">
-     <property name="maximumSize">
+    <widget class="QFrame" name="renderParent">
+     <property name="minimumSize">
       <size>
-       <width>300</width>
-       <height>16777215</height>
+       <width>0</width>
+       <height>0</height>
       </size>
      </property>
+     <property name="cursor">
+      <cursorShape>CrossCursor</cursorShape>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
     </widget>
-    <widget class="QSplitter" name="splitter">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>GroupBox</string>
      </property>
-     <widget class="QFrame" name="renderParent">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QGroupBox" name="groupBox">
-      <property name="title">
-       <string>GroupBox</string>
+    </widget>
+   </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="maximumSize">
+     <size>
+      <width>300</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tabProperties">
+     <attribute name="title">
+      <string>Properties</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>291</width>
+        <height>491</height>
+       </rect>
       </property>
      </widget>
     </widget>
-    <widget class="QTabWidget" name="tabWidget">
-     <property name="maximumSize">
-      <size>
-       <width>300</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="currentIndex">
-      <number>1</number>
-     </property>
-     <widget class="QWidget" name="tab">
-      <attribute name="title">
-       <string>Properties</string>
-      </attribute>
-     </widget>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="title">
-       <string>Tab 2</string>
-      </attribute>
-     </widget>
+    <widget class="QWidget" name="tabMaterial">
+     <attribute name="title">
+      <string>Material</string>
+     </attribute>
     </widget>
    </widget>
   </widget>
@@ -89,7 +95,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1312</width>
+     <width>1087</width>
      <height>30</height>
     </rect>
    </property>
@@ -100,7 +106,14 @@
     <addaction name="actionNew_Scene"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuAssets">
+    <property name="title">
+     <string>Import</string>
+    </property>
+    <addaction name="actionImportModel"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuAssets"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew_Scene">
@@ -111,6 +124,16 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionModel">
+   <property name="text">
+    <string>Model</string>
+   </property>
+  </action>
+  <action name="actionImportModel">
+   <property name="text">
+    <string>Model</string>
    </property>
   </action>
  </widget>
