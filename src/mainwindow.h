@@ -43,6 +43,6 @@ public:
 	void showEvent(QShowEvent *event) override;
 
 private slots:
-    void on_pushButton_clicked();
+	void importModel();
 };
 #endif // MAINWINDOW_H

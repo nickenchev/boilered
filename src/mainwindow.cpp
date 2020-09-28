@@ -1,4 +1,5 @@
 #include <array>
+#include <QFileDialog>
 
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
@@ -21,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
 	  ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+	// setup menu actions
+	connect(ui->actionImportModel, &QAction::triggered, this, &MainWindow::importModel);
 
 	auto *vkRenderer = static_cast<Boiler::Vulkan::VulkanRenderer *>(renderer.get());
 
@@ -86,7 +90,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::importModel()
 {
-    engine.getEcs().newEntity();
+	QFileDialog::getOpenFileUrl();
 }
