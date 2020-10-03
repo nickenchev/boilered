@@ -4,8 +4,6 @@
 #include <QMainWindow>
 #include <QVulkanInstance>
 
-#include "core/engine.h"
-
 class EntityListModel;
 class RenderView;
 
@@ -15,32 +13,28 @@ QT_END_NAMESPACE
 
 namespace Boiler
 {
-	class Renderer;
-	class Part;
+	class Engine;
 }
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 	// Qt members
-    QVulkanInstance instance;
     Ui::MainWindow *ui;
     QWidget *container;
     RenderView *renderView;
     EntityListModel *entityListModel;
-
-	// Boiler related
-	std::unique_ptr<Boiler::Renderer> renderer;
-	std::shared_ptr<Boiler::Part> part;
-    Boiler::Engine engine;
+	Boiler::Engine &engine;
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(Boiler::Engine &engine, QWidget *parent = nullptr);
     ~MainWindow();
 
 	// overrides
 	void closeEvent(QCloseEvent *event) override;
 	void showEvent(QShowEvent *event) override;
+
+	RenderView *getRenderView() { return renderView; }
 
 private slots:
 	void importModel();

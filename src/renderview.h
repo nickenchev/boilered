@@ -14,7 +14,9 @@ class RenderView : public QWindow
 
     void resizeEvent(QResizeEvent *event) override
     {
+		std::cout << "Resize" << std::endl;
         QWindow::resizeEvent(event);
+		engine.getRenderer().resize(Boiler::Size(event->size().width(), event->size().height()));
     }
 
     void exposeEvent(QExposeEvent *event) override
@@ -82,12 +84,6 @@ class RenderView : public QWindow
     bool event(QEvent *event) override
     {
         QWindow::event(event);
-
-        if (running)
-        {
-            engine.step();
-            requestUpdate();
-        }
         return true;
     }
 
