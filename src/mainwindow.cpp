@@ -1,5 +1,7 @@
 #include <array>
 #include <QFileDialog>
+#include <iostream>
+#include <iterator>
 
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
@@ -7,6 +9,8 @@
 #include "entitylistmodel.h"
 #include "video/vulkanrenderer.h"
 #include "samplepart.h"
+
+#include "assets/gltfimporter.h"
 
 std::vector<const char *> extensions =
 {
@@ -92,5 +96,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::importModel()
 {
-	QFileDialog::getOpenFileUrl();
+	QString fileName = QFileDialog::getOpenFileName(this, tr("Import GLTF scene"), "file",
+													tr("GLTF Scene (*.gltf);;All Files (*)"));
+
+	Boiler::GLTFImporter importer;
+	importer.import(engine, fileName.toStdString());
 }

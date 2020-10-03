@@ -19,12 +19,12 @@ class SamplePart : public Boiler::Part
 
 	std::vector<Boiler::MaterialId> materialIds;
 
-	bool moveLeft, moveRight, moveCloser, moveFurther, moveUp, moveDown, turnLeft, turnRight, lookUp, lookDown;
-
 	auto loadPrimitive(const Boiler::gltf::ModelAccessors &modelAccess, const Boiler::gltf::Primitive &primitive);
 	Boiler::Entity loadNode(const Boiler::gltf::Model &model, const Boiler::gltf::ModelAccessors &modelAccess, std::unordered_map<int, Boiler::Entity> &nodeEntities, int nodeIndex);
 	
 public:
+	bool moveLeft, moveRight, moveCloser, moveFurther, moveUp, moveDown, turnLeft, turnRight, lookUp, lookDown;
+
     SamplePart(Boiler::Engine &engine);
 
     void onStart() override;
